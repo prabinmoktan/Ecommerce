@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "backend/src/routes", "backend/src/dbbackend/src/middlewareware", "backend/src/controllers", "../backend/src/service", "../backend/src/models"]
+  "include": ["src"]
 }

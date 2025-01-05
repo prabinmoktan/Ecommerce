@@ -1,12 +1,10 @@
-import dotenv from "dotenv";
+import * as dotenv from 'dotenv'
 import { dbConnect } from "./db/index.js";
 import { app } from "./App.js";
 
 dotenv.config({ path: "./.env " });
 const port = process.env.PORT || 8000;
-app.get("/", (req, res) => {
-  res.send("WE ARE ALIENS");
-});
+
 
 dbConnect()
   .then(() => {

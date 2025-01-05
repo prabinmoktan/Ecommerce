@@ -1,10 +1,12 @@
+import { Cookies } from 'js-cookie';
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model.ts";
-import { Request, Response } from "express";
+import { User } from "../models/user.model";
+import { NextFunction, Request, Response } from "express";
 
 const options = {
   httpOnly: true,
   secure: true,
+  
 };
 
 const generateRefreshAndAccessToken = async (userId: string) => {
@@ -29,8 +31,7 @@ const generateRefreshAndAccessToken = async (userId: string) => {
 
 const registerUser = async (req: Request, res: Response) => {
   const { firstName, lastName, email, gender, password } = req.body;
-  console.log(req.body);
-  if (
+    if (
     [firstName, lastName, email, password, gender].some(
       (field) => !field || field.trim() === ""
     )
@@ -58,11 +59,15 @@ const registerUser = async (req: Request, res: Response) => {
   );
   if (!createUser) {
     res.status(400).json({ message: "Something went wrong while registering" });
+    return;
   }
+  const { accessToken, refreshToken } = await generateRefreshAndAccessToken(user._id as string)
   res.status(200).json({
     success: true,
     message: "User Account created successfully",
     createUser,
+    accessToken, 
+    refreshToken
   });
 };
 
@@ -84,14 +89,15 @@ const loginUser = async (req: Request, res: Response) => {
   const { accessToken, refreshToken } = await generateRefreshAndAccessToken(
     user._id as string
   );
+  
 
   const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
   res
     .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
+    .cookie("accessToken", accessToken, {...options, expires: new Date(Date.now() +  60* 60* 1000)})
+    .cookie("refreshToken", refreshToken,{ ...options, expires: new Date(Date.now() + 7*24* 60* 60* 1000)})
     .json({
       success: true,
       message: "User logged in successfully",
@@ -102,20 +108,22 @@ const loginUser = async (req: Request, res: Response) => {
 };
 
 const logoutUser = async (req: Request, res: Response) => {
-  // @ts-ignore
-  if (!req.user) {
-    return res
-      .status(400)
-      .json({ success: false, message: "User not authenticated" });
-  }
+  
+
   await User.findByIdAndUpdate(
     // @ts-ignore
-    req.user._id,
+   req.user?._id,
     {
-      $unset: { refreshToken: 1 },
+      $set: {
+        refreshToken: undefined,
+      },
+     
     },
-    { new: true }
-  );
+    {
+      new: true
+    }
+  )
+  
   res
     .status(200)
     .clearCookie("accessToken", options)
@@ -126,40 +134,34 @@ const logoutUser = async (req: Request, res: Response) => {
     });
 };
 
-const refreshAndAccessToken = async (req: Request, res: Response) => {
-  const incomingRefreshToken =
-    req.cookies.refreshToken || req.body.refreshToken;
-  if (!incomingRefreshToken) {
-    return res.status(401).json({ message: "Unauthrized Request." });
-  }
-  const secretToken = process.env.REFRESH_TOKEN_SECRET;
-  if (!secretToken) {
-    console.error(
-      "REFRESH_TOKEN_SECRET is not defined in environment variables."
-    );
-    return res.status(500).json({ message: "Internal Server Error." });
+const refreshAccessToken = async (req: Request, res: Response, next: NextFunction) => {
+  const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+  if(!incomingRefreshToken){
+    res.status(401).json({success: false, message: "UnAuthorized request"})
   }
   try {
-    const decodedToken = jwt.verify(incomingRefreshToken, secretToken) as {
-      _id: string;
-    };
-
-    const user = await User.findById(decodedToken._id);
-    if (!user) {
+    const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET ) as jwt.JwtPayload;
+    const user = await User.findById(decodedToken?._id); 
+    if(!user){
+      res.status(401).json({message: " Invalid Refresh token"})
+    }
+    if(incomingRefreshToken !== user?.refreshToken){
       res.status(401).json({
-        message: "Invalid Refresh token",
-      });
+        message: "Invalid  or expired refresh token "
+      })
+      return;
     }
-    if (incomingRefreshToken !== user?.refreshToken) {
-     return res.status(401).json({
-        message: "Refresh token expired",
-      });
-    }
-    // @ts-ignore
-    const {accessToken, refreshToken} = await generateRefreshAndAccessToken(user?._id);
-
-
-  } catch (error) {}
+  const {accessToken, refreshToken} = await generateRefreshAndAccessToken(user._id as string)
+  res.status(200)
+  .cookie("accessToken", accessToken, {...options,expires: new Date(Date.now() +  60* 60* 1000)})
+  .cookie("refreshToken",  refreshToken, {...options, expires: new Date(Date.now() + 7*24* 60* 60* 1000)})
+  .json({success: true, message: "token successfully refreshed"}),
+  accessToken, refreshToken
+  } catch (error) {
+    res.status(500).json({
+      message: "Invalid refresh token"
+    })
+  }
 };
 
-export { registerUser, loginUser, logoutUser };
+export { registerUser, loginUser, logoutUser, refreshAccessToken };

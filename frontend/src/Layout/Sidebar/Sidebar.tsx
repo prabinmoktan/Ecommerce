@@ -5,7 +5,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 const Sidebar = () => {
   return (
     <>
-      <aside className="  w-1/6 h-screen flex flex-col justify-between py-10 dark:bg-gray-800 border-r border-gray-200">
+      <aside className="  w-1/6 h-screen flex flex-col justify-between  dark:bg-gray-800 border-r border-gray-200 bg-gray-200 pb-20">
       <div>
 
         {navlink.map((item, index) => (
@@ -19,7 +19,7 @@ const Sidebar = () => {
         ))}
         </div>
         <div>
-            <div className="flex items-center p-4 ">
+            <div className="flex items-center p-4 dark:text-gray-50 cursor-pointer">
                 <span> <IoLogOutOutline className="text-2xl"/></span>
                 <span className="ml-2">Logout</span>
             </div>

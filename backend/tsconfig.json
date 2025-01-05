@@ -1,11 +1,13 @@
 {
-    "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }

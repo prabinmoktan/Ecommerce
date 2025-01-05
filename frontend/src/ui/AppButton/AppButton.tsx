@@ -5,16 +5,20 @@ interface ButtonTypes{
     onClick?: () => void;
     icon?: React.ReactNode;
     type?: 'button' | 'submit' | 'reset';
+    background?: 'primary' | 'danger';
+    disabled?: boolean;
 }
 
-const AppButton:React.FC<ButtonTypes> = ({title, onClick,icon,type, ...rest}) => {
+const AppButton:React.FC<ButtonTypes> = ({title, onClick,icon,type,background = 'primary',disabled, ...rest}) => {
   return (
     <>
-    <div className='flex gap-4 bg-blue-800 text-white py-2 px-3 rounded items-center'>
-    <button onClick={onClick} {...rest} type={type}>{title}</button>
-    <span>
+    <div className={`${background === 'primary' && 'bg-green-600'} ${background === 'danger' && 'bg-red-600'} flex gap-4  text-white py-2 px-3 rounded items-center` } >
+    <button onClick={onClick} {...rest} type={type} disabled={disabled}>{title}</button>
+    {
+      icon && 
+      <span>
         {icon}
-    </span>
+    </span>}
 
     </div>
     </>

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
-import { uploadOnCloudinary } from "../service/cloudinary.ts";
-import { Product } from "../models/product.model.ts";
-import { Category } from "../models/category.model.ts";
+import { uploadOnCloudinary } from "../service/cloudinary";
+import { Product } from "../models/product.model";
+import { Category } from "../models/category.model";
 
 const createProduct = async (req: Request, res: Response): Promise<void> => {
   const { title, description, price, stock, category } = req.body;
@@ -12,7 +12,7 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
     )
   ) {
     res
-      .status(200)
+      .status(404)
       .json({ success: false, message: "All fields are required" });
 
     return;
@@ -51,7 +51,7 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
     const populatedProduct = await Product.findById(product._id).populate(
       "category",
       "name"
-    );
+    ).exec();
     res.status(200).json({
       success: true,
       message: "Product created Successfully",
@@ -68,7 +68,7 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
   }
 };
 const getProducts = async (req: Request, res: Response) => {
-  const products = await Product.find();
+  const products = await Product.find().populate('category', 'name').exec();
   if (!products) {
     res.status(404).json({ success: false, message: "No products found" });
     return;
@@ -101,7 +101,7 @@ const getProductsById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteProduct = async (req: Request, res: Response) => {
+const deleteProductById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
@@ -124,9 +124,10 @@ const deleteProduct = async (req: Request, res: Response) => {
     return;
   }
 };
-const updateProduct = async(req: Request, res: Response) => {
+const updateProductById = async(req: Request, res: Response) => {
   const productId = req.params.id;
   const { title, price, description, stock, category } = req.body;
+
  
   
   try {
@@ -136,6 +137,7 @@ const updateProduct = async(req: Request, res: Response) => {
       return;
     }
     const existingcategory = await Category.findOne({name:category});
+    console.log(existingcategory)
     if (!existingcategory) {
       res.status(404).json({ success: false, message: "Category not found" });
       return;
@@ -143,6 +145,10 @@ const updateProduct = async(req: Request, res: Response) => {
     }
     // @ts-ignore
     const imagePath = req.files?.images as Express.Multer.File[];
+    if(!imagePath || imagePath.length === 0){
+      res.status(400).json({ success: false, message: "Product image is required"});
+      return;
+    }
     const uploadImages = await Promise.all(
       imagePath.map((image) => uploadOnCloudinary(image.path))
       
@@ -183,8 +189,8 @@ const updateProduct = async(req: Request, res: Response) => {
 
 export {
   createProduct,
-  deleteProduct,
-  updateProduct,
+  deleteProductById,
+  updateProductById,
   getProductsById,
   getProducts,
 };

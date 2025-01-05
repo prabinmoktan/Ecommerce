@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
-import { DB_NAME } from "../../../frontend/src/constant.js";
+import * as dotenv from 'dotenv';
+import { DB_NAME } from "../constant";
 
 dotenv.config();
 

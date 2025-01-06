@@ -14,7 +14,7 @@ export interface UserApiResponse {
 }
 
 export interface ProductsTypes {
-  _id: string;
+  _id?: string;
   title: string;
   description: string;
   price: number;

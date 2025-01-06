@@ -2,7 +2,6 @@ import AppButton from "../../ui/AppButton/AppButton";
 import { IoAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import AppTable from "../../ui/AppTable/AppTable";
-import ToggleDarkmode from "../../ui/ToggleDarkmode/ToggleDarkmode";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -10,7 +9,6 @@ const Products = () => {
   return (
     <>
       <div className="w-full h-full">
-        <ToggleDarkmode/>
         <div className="w-44">
           <AppButton
             title="Add Products"

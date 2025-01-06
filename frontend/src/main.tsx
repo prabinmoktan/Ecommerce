@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
 import AppModal from "./ui/AppModal/AppModal.tsx";
+import { ToastContainer } from "react-toastify";
 
 
 createRoot(document.getElementById("root")!).render(
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")!).render(
       <BrowserRouter future={{
     v7_relativeSplatPath: true,
   }} >
+    <ToastContainer className="text-sm"/>
         <App />
         <AppModal/>
       </BrowserRouter>

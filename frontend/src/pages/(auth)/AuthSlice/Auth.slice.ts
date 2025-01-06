@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../../redux/store";
 
 interface User {
     _id: string;
@@ -40,3 +41,5 @@ const authSlice = createSlice({
 
 export const {login, logout} = authSlice.actions;
 export default authSlice.reducer
+
+export const isLogged = ((state: RootState) => state.auth.isLogged)

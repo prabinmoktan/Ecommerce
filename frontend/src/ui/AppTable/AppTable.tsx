@@ -7,7 +7,6 @@ import { MdDeleteOutline } from "react-icons/md";
 import { openModal } from "../../redux/ModalSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Skeleton } from "../../components/components/ui/skeleton";
 
 const AppTable = () => {
   const { isLoading, data } = useGetProductsQuery();
@@ -61,9 +60,7 @@ const AppTable = () => {
                 }`}
               >
                 <td className="px-4 py-2  border-gray-300 flex gap-4 items-center">
-                  {
-                    isLoading && <Skeleton h-16 w-12/>
-                  }
+                 
                   {product.images.length > 0 && (
                     // @ts-ignore
                     <img src={product.images?.[0]} className="h-16 w-12" />

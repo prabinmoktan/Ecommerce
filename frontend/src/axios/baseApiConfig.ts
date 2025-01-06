@@ -39,9 +39,10 @@ const baseQuery: BaseQueryFn<
       error.response?.status === 401 &&
       error.response.data === "token_not_valid"
     ) {
-      const refresh = await axiosInstance.post("/user/refreshAndAccessToken", {
+      const refresh = await axiosInstance.post("/user/refreshToken", {
         withCredentials: true
       });
+      console.log('refresh===>', refresh)
       const {accessToken } = refresh.data;
        // Update the headers for the retry
        axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
@@ -65,4 +66,5 @@ export const baseApiSlice = createApi({
   reducerPath: 'baseApi',
   baseQuery,
   endpoints: () => ({}), // Empty initially, to be injected later
+  tagTypes: []
 });

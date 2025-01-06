@@ -9,10 +9,12 @@ import Login from "./pages/(auth)/login/Login";
 import Register from "./pages/(auth)/Register/Register";
 import Navbar from "./Layout/Navbar/Navbar";
 
+
 function App() {
   const location = useLocation();
   const noSidebar = ["/login", "/register"];
   const hideSidebar = !noSidebar.includes(location.pathname);
+  
   return (
     <>
       <div className=" flex flex-col h-screen overflow-hidden">

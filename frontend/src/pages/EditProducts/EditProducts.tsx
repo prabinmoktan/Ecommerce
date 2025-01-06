@@ -9,12 +9,12 @@ import AppFileField from "../../ui/AppForm/AppFileField/AppFileField";
 import { useLocation, useNavigate } from "react-router-dom";
 import { openModal } from "../../redux/ModalSlice";
 import { useDispatch } from "react-redux";
-import {  useUpdateProductByIdMutation } from "../Products/products.api";
+import { useUpdateProductByIdMutation } from "../Products/products.api";
 import { useGetCategoryQuery } from "../Products/category.api";
 
 const EditProducts = () => {
   const navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const product = state?.product;
   const dispatch = useDispatch();
   const handleOpenmodal = () => {
@@ -24,14 +24,14 @@ const EditProducts = () => {
         save: "save",
         cancel: "cancel ",
         showController: true,
-        
       })
     );
   };
 
   const { isLoading, data } = useGetCategoryQuery({});
-  console.log(isLoading)
-  const [updateProduct, { isLoading: isCreating }] = useUpdateProductByIdMutation();
+  console.log(isLoading);
+  const [updateProduct, { isLoading: isCreating }] =
+    useUpdateProductByIdMutation();
   console.log();
 
   const options = data?.category || [];
@@ -42,7 +42,7 @@ const EditProducts = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: product?.title,  
+      title: product?.title,
       price: product?.price || "",
       description: product?.description || "",
       category: product?.category || "",
@@ -54,30 +54,29 @@ const EditProducts = () => {
   const onsubmit = async (data: any) => {
     const formData = new FormData();
     // Append text fields
-  formData.append('title', data.title);
-  formData.append('description', data.description);
-  formData.append('price', data.price);
-  formData.append('stock', data.stock);
-  formData.append('category', data.category);
-  
-  // Append files
-  if (Array.isArray(data.images)) {
-    data.images.forEach((image: File) => {
-      formData.append('images', image); // Each file is appended separately
-    });
-  }
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("price", data.price);
+    formData.append("stock", data.stock);
+    formData.append("category", data.category);
 
-  console.log('formData===>', formData);
+    // Append files
+    if (Array.isArray(data.images)) {
+      data.images.forEach((image: File) => {
+        formData.append("images", image); // Each file is appended separately
+      });
+    }
 
-    
+
     try {
-     
-    
-      await updateProduct({_id: product._id,  data: formData}).unwrap();
-      navigate('/products')
-     
+      const res = await updateProduct({ _id: product._id, data: formData }).unwrap();
+      console.log(res)
+      // if(res){
+        
+      // }
+      navigate("/products");
     } catch (error) {
-      console.log('error==>', error)
+      console.log("error==>", error);
     }
   };
   return (
@@ -164,9 +163,9 @@ const EditProducts = () => {
                             ? "Select More Images"
                             : "Select Image"
                         }
-                        onFileChange={(files)=> {
-                          field.onChange(files)}}
-                        
+                        onFileChange={(files) => {
+                          field.onChange(files);
+                        }}
                         {...field}
                       />
                     )}
@@ -196,7 +195,7 @@ const EditProducts = () => {
               </div>
               <div className="flex justify-evenly  absolute bottom-0 right-0 gap-5 mb-10 mr-10">
                 <AppButton
-                  title={isCreating ? 'loading...' : 'save'}
+                  title={isCreating ? "loading..." : "save"}
                   type="submit"
                   background="primary"
                   disabled={isCreating}

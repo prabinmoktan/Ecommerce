@@ -7,6 +7,7 @@ const productsApiSlice = baseApiSlice.injectEndpoints({
       query: () => ({
         url: "/products",
         method: "GET",
+       
       }),
     }),
     createProducts: builder.mutation<ApiResponse, ProductsTypes>({
@@ -20,7 +21,7 @@ const productsApiSlice = baseApiSlice.injectEndpoints({
       query: (id) => ({
         url: `/products/${id}`,
         method: "DELETE",
-      })
+      }),
     }),
     updateProductById: builder.mutation<ProductsTypes, { _id: string, data: FormData }>({
       query: ({ _id, data }) => ({
@@ -28,7 +29,8 @@ const productsApiSlice = baseApiSlice.injectEndpoints({
         method: 'PATCH',
         body: data,
       })
-    })
+    }),
+    
   }),
 });
 export const { useGetProductsQuery, useCreateProductsMutation, useDeleteProductsMutation, useUpdateProductByIdMutation } = productsApiSlice;

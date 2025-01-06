@@ -6,6 +6,7 @@ import AppText from "../AppForm/AppText/AppText";
 import AppButton from "../AppButton/AppButton";
 import { useCreateCategoryMutation } from "../../pages/Products/category.api";
 import { useDeleteProductsMutation } from "../../pages/Products/products.api";
+import { successToast } from "../../services/toastify.service";
 
 const AppModal = () => {
   const { isOpen, content, showController } = useSelector(
@@ -31,7 +32,10 @@ const AppModal = () => {
   };
     const handleDelete = async(id: string) => {
       try {
-        await deleteProduct(id);
+        const response = await deleteProduct(id);
+        if(response){
+          successToast(response.data?.message || '')
+        }
 
         dispatch(closeModal());
       } catch (error) {

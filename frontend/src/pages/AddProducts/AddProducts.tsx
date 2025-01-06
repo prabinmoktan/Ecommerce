@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import AppButton from "../../ui/AppButton/AppButton";
 
 import { useForm, Controller } from "react-hook-form";
 import AppText from "../../ui/AppForm/AppText/AppText";
-import ToggleDarkmode from "../../ui/ToggleDarkmode/ToggleDarkmode";
 import AppTextArea from "../../ui/AppForm/AppTextArea/AppTextArea";
 import AppSelect from "../../ui/AppForm/AppSelect/AppSelect";
 import AppFileField from "../../ui/AppForm/AppFileField/AppFileField";
@@ -14,6 +12,8 @@ import { openModal } from "../../redux/ModalSlice";
 import { useDispatch } from "react-redux";
 import { useCreateProductsMutation } from "../Products/products.api";
 import { useGetCategoryQuery } from "../Products/category.api";
+import {  successToast } from "../../services/toastify.service";
+import { Oval } from "react-loader-spinner";
 
 const AddProducts = () => {
   const navigate = useNavigate();
@@ -25,15 +25,13 @@ const AddProducts = () => {
         save: "save",
         cancel: "cancel ",
         showController: true,
-        
       })
     );
   };
 
-  const { isLoading, data } = useGetCategoryQuery({});
-  console.log(isLoading)
-  const [createProducts,{isLoading: isCreating}] = useCreateProductsMutation();
-  console.log();
+  const { data } = useGetCategoryQuery({});
+  const [createProducts, { isLoading: isCreating }] =
+    useCreateProductsMutation();
 
   const options = data?.category || [];
 
@@ -48,36 +46,44 @@ const AddProducts = () => {
   const onsubmit = async (data: any) => {
     const formData = new FormData();
     // Append text fields
-  formData.append('title', data.title);
-  formData.append('description', data.description);
-  formData.append('price', data.price);
-  formData.append('stock', data.stock);
-  formData.append('category', data.category);
-  
-  // Append files
-  if (Array.isArray(data.images)) {
-    data.images.forEach((image: File) => {
-      formData.append('images', image); // Each file is appended separately
-    });
-  }
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("price", data.price);
+    formData.append("stock", data.stock);
+    formData.append("category", data.category);
 
+    // Append files
+    if (Array.isArray(data.images)) {
+      data.images.forEach((image: File) => {
+        formData.append("images", image); // Each file is appended separately
+      });
+    }
 
-    
     try {
       // @ts-ignore
       const response = await createProducts(formData).unwrap();
-      console.log('response==>' , response)
-      navigate('/products')
+      console.log(response);
+      successToast(response.message);
+      navigate("/products");
     } catch (error) {
-      console.log('error==>', error)
+      console.log("error==>", error);
     }
   };
   return (
     <>
-      <div className="w-full h-screen dark:bg-gray-900 px-5 overflow-hidden">
-        <div>
-          <ToggleDarkmode />
+    {isCreating && 
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 w-screen h-screen">
+          <Oval visible={true}
+      height="80"
+      width="80"
+      color="white"
+      ariaLabel="oval-loading"
+      wrapperStyle={{}}
+      wrapperClass=""/>
         </div>
+        }
+      <div className="w-full h-screen dark:bg-gray-900 px-5 overflow-hidden">
+       
 
         <form onSubmit={handleSubmit(onsubmit)}>
           <div className="flex space-between w-full  gap-4 rounded-md my-2 h-full">
@@ -156,9 +162,9 @@ const AddProducts = () => {
                             ? "Select More Images"
                             : "Select Image"
                         }
-                        onFileChange={(files)=> {
-                          field.onChange(files)}}
-                        
+                        onFileChange={(files) => {
+                          field.onChange(files);
+                        }}
                         {...field}
                       />
                     )}
@@ -188,7 +194,7 @@ const AddProducts = () => {
               </div>
               <div className="flex justify-evenly  absolute bottom-0 right-0 gap-5 mb-10 mr-10">
                 <AppButton
-                  title={isCreating ? 'loading...' : 'save'}
+                  title={isCreating ? "loading..." : "save"}
                   type="submit"
                   background="primary"
                   disabled={isCreating}

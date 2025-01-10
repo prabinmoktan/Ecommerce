@@ -10,27 +10,27 @@ import { CiSettings } from "react-icons/ci";
 export const navlink = [
     {
         name: 'Dashboard',
-        link: '/',
+        link: '/admin/',
         icon: MdOutlineDashboard,
     },
     {
         name: 'Products',
-        link: '/products',
+        link: '/admin/products',
         icon: GiClothJar,
     },
     {
         name: 'Orders',
-        link: '/orders',
+        link: '/admin/orders',
         icon: CiShoppingCart,
     },
     {
-        name: 'Customers',
-        link: '/customers',
+        name: 'Users',
+        link: '/admin/users',
         icon: FaUserFriends,
     },
     {
         name: 'Settings',
-        link: '/settings',
+        link: '/admin   /settings',
         icon: CiSettings,
     }, 
 ]
@@ -41,4 +41,13 @@ export const productsTable = [
     {name: "Price"},
     {name: 'Stock'},    
     {name: 'Actions'}
+]
+
+export const userTable = [
+    {name: 'Full Name'},
+    {name: 'Email'},
+    {name: "Role"}, 
+    
+    {name: 'Actions'},    
+    
 ]

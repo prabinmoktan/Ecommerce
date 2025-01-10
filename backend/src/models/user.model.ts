@@ -9,6 +9,7 @@ interface UserSchemaTypes extends Document {
   password: string;
   gender: string;
   refreshToken?: string;
+  role: "admin" | "user" | "moderator"
 }
 
 // Extend the base schema with custom methods
@@ -48,6 +49,11 @@ const userSchema = new Schema<UserDocument>(
       required: true,
       minlength: 6,
       maxlength: 64,
+    },
+    role: {
+      type: String,
+      enum: ['admin', 'user', 'moderator'],
+      default: 'user'
     },
     refreshToken: {
       type: String,

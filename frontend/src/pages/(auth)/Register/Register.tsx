@@ -31,7 +31,7 @@ const navigate = useNavigate();
   const onSubmit = async(data: RegisterTypes) => {
     try {
       await createUser(data).unwrap();
-      navigate('/login')
+      navigate('/admin/login')
     } catch (error) {
       console.log(error)
     }

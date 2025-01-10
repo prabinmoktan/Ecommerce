@@ -64,7 +64,7 @@ const AddProducts = () => {
       const response = await createProducts(formData).unwrap();
       console.log(response);
       successToast(response.message);
-      navigate("/products");
+      navigate("/admin/products");
     } catch (error) {
       console.log("error==>", error);
     }

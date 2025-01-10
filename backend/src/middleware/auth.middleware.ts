@@ -1,8 +1,10 @@
 import { NextFunction, Response, Request } from "express";
 import { User } from "../models/user.model";
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from "jsonwebtoken";
 
-
+interface CustomJwtPayload extends JwtPayload {
+  _id: string;
+}
 
 export const verifyJWT = async (
   req: Request,
@@ -10,27 +12,31 @@ export const verifyJWT = async (
   next: NextFunction
 ) => {
   try {
-    const token =
-  req.cookies?.accessToken ||
-  (typeof req.headers["authorization"] === "string"
-    ? req.headers["authorization"].replace("Bearer ", "")
-    : null);
+    const token =  req.cookies?.accessToken ||
+    (typeof req.headers["authorization"] === "string"
+      ? req.headers["authorization"].replace("Bearer ", "")
+      : null);
     if (!token) {
       res.status(401).json({ message: "Token not provided" });
       return;
     }
-  
-    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    const user = await User.findById((decodedToken as jwt.JwtPayload)._id).select("-password -refreshToken");
-    if(!user){
-      res.status(401).json({message: "Invalid Access Token"});
-      return;
+    if (!process.env.ACCESS_TOKEN_SECRET) {
+      throw new Error("ACCESS_TOKEN_SECRET is not defined in environment variables");
     }
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) as CustomJwtPayload;
+    const user = await User.findById(decodedToken._id).select(
+      "-password -refreshtoken"
+    ); 
     req.user = user;
-    next();
+  
+      if (!user) {
+        res.status(401).json({ message: "Invalid Access Token" });
+        return;
+      }
+      next();
+    
   } catch (error) {
-    res.status(401).json({message: "Invalid Access token"})
+    res.status(401).json({ message: "Invalid Token", error });
     return;
   }
-
 };

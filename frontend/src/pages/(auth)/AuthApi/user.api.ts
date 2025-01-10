@@ -28,8 +28,23 @@ const UserApi = baseApiSlice.injectEndpoints({
             method: "POST",
             body: data
         })
+    }),
+    refreshAcessToken: builder.mutation<UserApiResponse, string>({
+      query: (token)=> ({
+        url: '/user/refreshToken',
+        method: "POST", 
+        data: {token},
+        
+      }),
+
+    }),
+    getUsers: builder.query<UserApiResponse, void>({
+      query:()=>({
+      url: '/user',
+      method: "GET"
+      })
     })
   }),
 });
 
-export const { useCreateUserMutation, useLoginUserMutation, useLogoutUserMutation } = UserApi;
+export const { useCreateUserMutation, useLoginUserMutation, useLogoutUserMutation, useRefreshAcessTokenMutation, useGetUsersQuery } = UserApi;

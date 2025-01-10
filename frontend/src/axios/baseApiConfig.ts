@@ -28,6 +28,7 @@ const baseQuery: BaseQueryFn<
         ...headers,
         accept: "application/json",
       },
+      withCredentials: true
     });
       return { data };
   } catch (axiosError) {
@@ -66,5 +67,5 @@ export const baseApiSlice = createApi({
   reducerPath: 'baseApi',
   baseQuery,
   endpoints: () => ({}), // Empty initially, to be injected later
-  tagTypes: []
+  tagTypes: ['Product']
 });

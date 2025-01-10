@@ -74,7 +74,7 @@ const EditProducts = () => {
       // if(res){
         
       // }
-      navigate("/products");
+      navigate("/admin/products");
     } catch (error) {
       console.log("error==>", error);
     }
@@ -204,7 +204,7 @@ const EditProducts = () => {
                   title="cancel"
                   type="submit"
                   background="danger"
-                  onClick={() => navigate("/products")}
+                  onClick={() => navigate("/admin/products")}
                 />
               </div>
             </div>

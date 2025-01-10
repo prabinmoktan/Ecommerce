@@ -12,7 +12,6 @@ const Sidebar = () => {
   const dispatch= useDispatch();
   const navigate = useNavigate();
 const isLoggedIn = useSelector(isLogged)
-console.log('isLogged==>', isLoggedIn)
 
   const handleLogout = async() => {
     try {

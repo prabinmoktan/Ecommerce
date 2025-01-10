@@ -22,6 +22,14 @@ export interface ProductsTypes {
   category: { id: string; name: string };
   images: [];
 }
+export interface UserTypes {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: "Male" | "Female";
+  role: 'user' | 'admin';
+}
 
 export interface RegisterTypes {
   firstName: string;

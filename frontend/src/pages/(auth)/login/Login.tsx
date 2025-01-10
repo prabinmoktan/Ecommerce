@@ -43,21 +43,13 @@ const Login = () => {
           // @ts-ignore
           successToast(`Welcome, ${response.data.loggedInUser.firstName}`);
         }
-        navigate("/");
+        navigate("/admin");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  // useEffect(()=> {
-  //   const token = Cookies.get("accessToken")
-  //   if(token){
-  //     dispatch(login({
-  //       accessToken: token,
-  //       user: {},
-  //     }))
-  //   }
-  // },[])
+    
   return (
     <>
       <div className="w-screen h-screen flex justify-center items-center">

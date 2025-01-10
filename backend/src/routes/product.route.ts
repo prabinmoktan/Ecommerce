@@ -1,3 +1,4 @@
+import { verifyJWT } from './../middleware/auth.middleware';
 import express from "express"
 import { upload } from "../middleware/multer.middleware";
 import { createProduct, deleteProductById, getProducts, getProductsById,  updateProductById } from "../controllers/product.controller";
@@ -10,7 +11,7 @@ router.route('/products/:id').delete(deleteProductById);
 
 router.patch('/products/:id',upload.fields([{name: 'images'}]), updateProductById);
 
-router.route('/products').get(getProducts);
-router.route('/products/:id').get(getProductsById);
+router.route('/products').get( getProducts);
+router.route('/products/:id').get(verifyJWT, getProductsById);
 
 export default router;

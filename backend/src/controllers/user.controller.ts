@@ -30,7 +30,8 @@ const generateRefreshAndAccessToken = async (userId: string) => {
 };
 
 const registerUser = async (req: Request, res: Response) => {
-  const { firstName, lastName, email, gender, password } = req.body;
+  try {
+    const { firstName, lastName, email, gender, password, role } = req.body;
     if (
     [firstName, lastName, email, password, gender].some(
       (field) => !field || field.trim() === ""
@@ -41,11 +42,13 @@ const registerUser = async (req: Request, res: Response) => {
       .json({ success: false, message: "All fields are required" });
     return;
   }
+  const userRole = role || 'user'
   const existingUser = await User.findOne({ $or: [{ email }, { firstName }] });
   if (existingUser) {
     res.status(400).json({ message: "User already exists" });
     return;
   }
+  
 
   const user = await User.create({
     firstName,
@@ -53,6 +56,7 @@ const registerUser = async (req: Request, res: Response) => {
     email,
     gender,
     password,
+    role: userRole 
   });
   const createUser = await User.findById(user._id).select(
     "-password -refreshToken"
@@ -69,6 +73,10 @@ const registerUser = async (req: Request, res: Response) => {
     accessToken, 
     refreshToken
   });
+  return;
+  } catch (error) {
+    res.status(500).json({success: false, message: "Server error occured while creating an user", error})
+  }
 };
 
 const loginUser = async (req: Request, res: Response) => {
@@ -164,4 +172,18 @@ const refreshAccessToken = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export { registerUser, loginUser, logoutUser, refreshAccessToken };
+const getUsers = async(req: Request, res: Response)=> {
+  const users = await User.find().select("-password -refreshToken");
+  if(!users){
+    res.status(404).json({ success: false, message: "No Users found" });
+    return;
+  }
+  res.status(200).json({
+    success: true,
+    message: "Users fetched successfully",
+    users
+  });
+  return;
+}
+
+export { registerUser, loginUser, logoutUser, refreshAccessToken, getUsers };

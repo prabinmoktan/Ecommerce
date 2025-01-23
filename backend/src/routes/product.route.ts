@@ -11,7 +11,7 @@ router.route('/products/:id').delete(deleteProductById);
 
 router.patch('/products/:id',upload.fields([{name: 'images'}]), updateProductById);
 
-router.route('/products').get( getProducts);
+router.route('/products').get(verifyJWT, getProducts);
 router.route('/products/:id').get(verifyJWT, getProductsById);
 
 export default router;

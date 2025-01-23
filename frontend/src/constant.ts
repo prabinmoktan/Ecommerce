@@ -5,6 +5,28 @@ import { FaUserFriends } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 
 
+export const publicNavlink = [
+    {
+        name: 'Home',
+        link: '/',
+        // icon: MdOutlineDashboard,
+    },
+    {
+        name: 'Categories',
+        link: ''
+    },{
+        name: 'Products',
+        link: '/products'
+    },
+    {
+        name: 'Contact',
+        link: '/contact'
+    },
+    {
+        name: 'About Us',
+        link:'/about'
+    }
+]
 
 
 export const navlink = [

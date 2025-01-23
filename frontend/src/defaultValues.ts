@@ -1,10 +1,10 @@
 export const AddProductDefaultValues = {
     title: "",
-    price: 0,
+    price: '',
     description: "",
     category: "",
     images: [] ,
-    stock: 0,
+    stock: '',
     // brand: "",
     // status: "active",
     // discount: 0,

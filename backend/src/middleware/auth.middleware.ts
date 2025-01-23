@@ -16,6 +16,7 @@ export const verifyJWT = async (
     (typeof req.headers["authorization"] === "string"
       ? req.headers["authorization"].replace("Bearer ", "")
       : null);
+     
     if (!token) {
       res.status(401).json({ message: "Token not provided" });
       return;
@@ -27,13 +28,13 @@ export const verifyJWT = async (
     const user = await User.findById(decodedToken._id).select(
       "-password -refreshtoken"
     ); 
+    
+    if (!user) {
+      res.status(401).json({ message: "Invalid Access Token" });
+      return;
+    }
     req.user = user;
-  
-      if (!user) {
-        res.status(401).json({ message: "Invalid Access Token" });
-        return;
-      }
-      next();
+    next();
     
   } catch (error) {
     res.status(401).json({ message: "Invalid Token", error });

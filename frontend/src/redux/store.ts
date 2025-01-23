@@ -1,7 +1,7 @@
 import { baseApiSlice } from './../axios/baseApiConfig';
 import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from './ModalSlice';
-import authReducer from '../pages/(auth)/AuthSlice/Auth.slice';
+import authReducer from '../admin/Pages/(auth)/AuthSlice/Auth.slice'
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import { persistStore } from 'redux-persist';
@@ -21,11 +21,13 @@ export const store = configureStore({
         // auth: authReducer,
         auth: persistedReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(
+      {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat(baseApiSlice.middleware),
+      }
+    ).concat(baseApiSlice.middleware),
 
 })
 

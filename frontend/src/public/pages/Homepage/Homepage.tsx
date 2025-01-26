@@ -1,10 +1,11 @@
 import AppCarousel from "../../ui/AppCarousel/AppCarousel";
+import LogoCarousel from "../../ui/LogoCarousel/LogoCarousel";
 import "./Homepage.css";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 
 const images = [
-  // "/3.png",
+  
   "/4.png",
   "/5.png",
   "/6.png",
@@ -14,7 +15,7 @@ const images = [
 const Homepage = () => {
   return (
     <>
-      <div className="w-screen  flex justify-center items-start absolute top-0 z-0">
+      <div className="w-screen  flex justify-center items-start  absolute top-0 z-0">
         <div className=" w-screen flex items-center">
           <div className="w-1/2 h-full">
             <h1 className="shadows-into-light-regular">TEMAR</h1>
@@ -37,6 +38,11 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+        <div className="w-screen relative pt-[100vh]">
+          <LogoCarousel  />
+        </div>
+        
+      
     </>
   );
 };

@@ -7,7 +7,7 @@ import AppTextArea from "../../AdminUi/AppForm/AppTextArea/AppTextArea";
 import AppSelect from "../../AdminUi/AppForm/AppSelect/AppSelect";
 import AppFileField from "../../AdminUi/AppForm/AppFileField/AppFileField";
 import { useLocation, useNavigate } from "react-router-dom";
-import { openModal } from "../../../redux/ModalSlice";
+import { openModal } from "../../redux/ModalSlice";
 import { useDispatch } from "react-redux";
 import { useUpdateProductByIdMutation } from "../Products/products.api";
 import { useGetCategoryQuery } from "../Products/category.api";

@@ -1,10 +1,10 @@
-import { baseApiSlice } from './../axios/baseApiConfig';
 import { configureStore } from "@reduxjs/toolkit";
 import modalReducer from './ModalSlice';
-import authReducer from '../admin/Pages/(auth)/AuthSlice/Auth.slice'
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import { persistStore } from 'redux-persist';
+import { baseApiSlice } from "../../axios/baseApiConfig";
+import authReducer from  '../Pages/(auth)/AuthSlice/Auth.slice'
 
 const persistConfig = {
     key: 'root',

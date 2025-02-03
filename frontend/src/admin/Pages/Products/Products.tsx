@@ -8,7 +8,7 @@ import { ProductsTypes } from "../../../interface";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../../redux/ModalSlice";
+import { openModal } from "../../redux/ModalSlice";
 
 const Products = () => {
   const navigate = useNavigate();

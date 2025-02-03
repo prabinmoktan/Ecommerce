@@ -16,7 +16,7 @@ const Footer = () => {
           <img src="/Temar.jpeg" alt="..." className="w-36"/>
           <p>SHOP FASHIONLY...</p>
         </div>
-        <div className=" flex flex-col gap-3 text-center">
+        <div className=" flex flex-col gap-3 ">
           <h1 className="underline">
             LEGAL
           </h1>
@@ -25,7 +25,7 @@ const Footer = () => {
           <Link to={''}>Cookies Policy</Link>
           <Link to={''}>Data Processing</Link>
         </div>
-        <div className=" flex flex-col gap-3 text-center">
+        <div className=" flex flex-col gap-3 ">
           <h1 className="underline">
             COMPANY
           </h1>
@@ -33,7 +33,7 @@ const Footer = () => {
           <Link to={''}>Careers</Link>
           <Link to={''}>News</Link>
         </div>
-        <div className=" flex flex-col gap-3 mt-5 text-center">
+        <div className=" flex flex-col gap-3 mt-5 ">
           <Link to={''}>About us</Link>
           <Link to={''}>Contact us</Link>
           <Link to={''}>Affiliates</Link>

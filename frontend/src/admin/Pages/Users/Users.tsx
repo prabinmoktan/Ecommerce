@@ -4,7 +4,7 @@ import { useGetUsersQuery } from "../(auth)/AuthApi/user.api";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../../redux/ModalSlice";
+import { openModal } from "../../redux/ModalSlice";
 
 const Users = () => {
   const { data, isLoading } = useGetUsersQuery();

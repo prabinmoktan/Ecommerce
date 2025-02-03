@@ -1,3 +1,4 @@
+import AppCard from "../../ui/AppCard/AppCard";
 import AppCarousel from "../../ui/AppCarousel/AppCarousel";
 import LogoCarousel from "../../ui/LogoCarousel/LogoCarousel";
 import "./Homepage.css";
@@ -12,14 +13,21 @@ const images = [
   "/7.png",
 ];
 
+const card= [
+  {title: "T-shirt", image: "/4.png", price: "$1000"},
+  {title: "T-shirt", image: "/5.png", price: "$1000"},
+  {title: "T-shirt", image: "/6.png", price: "$1000"},
+  {title: "T-shirt", image: "/7.png", price: "$1000"},
+]
+
 const Homepage = () => {
   return (
     <>
-      <div className="w-screen  flex justify-center items-start  absolute top-0 z-0">
-        <div className=" w-screen flex items-center">
-          <div className="w-1/2 h-full">
-            <h1 className="shadows-into-light-regular">TEMAR</h1>
-            <p className="text-justify indent-10" >
+      <div className="w-screen h-1/3  flex justify-center items-start  absolute top-0 z-0">
+        <div className="w-full container grid grid-cols-2 gap-5 ">
+          <div className=" px-3 ">
+            <h1 className="shadows-into-light-regular text-center">TEMAR</h1>
+            <p className="text-justify indent-10 " >
               WELCOME TO TEMAR, YOUR ULTIMATE DESTINATION
               FOR ALL THINGS- IMMERSE YOURSELF IN A WORLD WHERE
               CREATIVITY KNOWS NO LIMITS, _______ AND INNOVATION IS THE DRIVING
@@ -33,12 +41,28 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="">
             <AppCarousel items={images} />
           </div>
         </div>
       </div>
-        <div className="w-screen relative pt-[100vh]">
+      <div className="w-screen mt-[calc(100vh-20%)]">
+        <h1>
+          All Collections
+        </h1>
+        <div className="  flex flex-wrap justify-evenly">
+        {
+          card?.map((item, index)=> (
+
+            <div key={index} >
+              <AppCard title={item.title} price={item.price} image={item.image}/>
+            </div>
+          ))
+        }
+        </div>
+       
+      </div>
+        <div className="w-screen ">
           <LogoCarousel  />
         </div>
         

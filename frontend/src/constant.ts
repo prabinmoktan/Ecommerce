@@ -3,6 +3,8 @@ import { GiClothJar } from "react-icons/gi";
 import { CiShoppingCart } from "react-icons/ci";
 import { FaUserFriends } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
+// import { IoIosLogOut } from "react-icons/io";
+
 
 export const publicNavlink = [
   {
@@ -27,6 +29,10 @@ export const publicNavlink = [
     link: "/about",
   },
 ];
+
+// export const accountLink = [
+//   {name: 'Log Out', icon: IoIosLogOut}
+// ]
 
 export const navlink = [
   {

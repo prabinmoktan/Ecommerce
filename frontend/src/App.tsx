@@ -11,6 +11,9 @@ import Products from './admin/Pages/Products/Products'
 import Users from './admin/Pages/Users/Users'
 import Product from './public/pages/Products/Product'
 import MainLayout from './public/Layout/MainLayout'
+import ProductsData from './public/pages/ProductsData/ProductsData'
+import EditProducts from './admin/Pages/EditProducts/EditProducts'
+import AddProducts from './admin/Pages/AddProducts/AddProducts'
 
 const App = () => {
   const isAuthenticated = useSelector(isLogged);
@@ -31,8 +34,8 @@ const App = () => {
       }
     } else {
       // Allow unauthenticated users to access public routes
-      const publicRoutes = ['/', '/auth/login', '/auth/register'];
-      if (!publicRoutes.includes(location.pathname)) {
+      const publicRoutes = ['/', '/auth/login', '/auth/register','/products'];
+      if (!publicRoutes.includes(location.pathname) && !location.pathname.startsWith('/products')) {
         // Redirect unauthenticated users trying to access private routes to the homepage
         navigate('/', { replace: true });
       }
@@ -42,6 +45,7 @@ const App = () => {
    <Routes>
       <Route path='/' element={<MainLayout/>}>
         <Route path='' element={<Homepage/>}/>
+        <Route path='product/:id' element={<ProductsData/>}/>
         <Route path='products' element={<Product/>}/>
       </Route>
       <Route path='/auth'>
@@ -52,6 +56,8 @@ const App = () => {
           <Route path='dashboard' element={<Home/>}/>
           <Route path='products' element={<Products/>}/>
           <Route path='users' element={<Users/>}/>
+          <Route path='products/editProducts/:id' element={<EditProducts/>}/>
+          <Route path='products/addProducts' element={<AddProducts/>}/>
       </Route>
    </Routes>
   )

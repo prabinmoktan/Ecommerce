@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "../../../redux/ModalSlice";
 import { Controller, useForm } from "react-hook-form";
 import AppText from "../AppForm/AppText/AppText";
 import AppButton from "../AppButton/AppButton";
@@ -8,6 +7,7 @@ import AppButton from "../AppButton/AppButton";
 import { successToast } from "../../../services/toastify.service";
 import { useCreateCategoryMutation } from "../../Pages/Products/category.api";
 import { useDeleteProductsMutation } from "../../Pages/Products/products.api";
+import { closeModal } from "../../redux/ModalSlice";
 
 const AppModal = () => {
   const { isOpen, content, showController } = useSelector(

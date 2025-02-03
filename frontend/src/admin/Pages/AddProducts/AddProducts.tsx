@@ -8,7 +8,7 @@ import AppSelect from "../../AdminUi/AppForm/AppSelect/AppSelect";
 import AppFileField from "../../AdminUi/AppForm/AppFileField/AppFileField";
 import { AddProductDefaultValues } from "../../../defaultValues";
 import { useNavigate } from "react-router-dom";
-import { openModal } from "../../../redux/ModalSlice";
+import { openModal } from "../../redux/ModalSlice";
 import { useDispatch } from "react-redux";
 import { useCreateProductsMutation } from "../Products/products.api";
 import { useGetCategoryQuery } from "../Products/category.api";

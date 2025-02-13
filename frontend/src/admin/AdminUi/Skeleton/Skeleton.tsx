@@ -70,32 +70,3 @@ export const Skeleton: React.FC<skeletontypes> = ({ variant = 'text', width, hei
   return <>{skeletons}</>;
 };
 
-// Example usage component
-// const SkeletonDemo = () => {
-//   return (
-//     <div className="space-y-6 p-4 max-w-lg">
-//       {/* Profile header example */}
-//       <div className="flex items-center gap-4">
-//         <Skeleton variant="circle" />
-//         <div className="flex-1">
-//           <Skeleton width="w-1/2" className="mb-2" />
-//           <Skeleton width="w-1/3" height="h-3" />
-//         </div>
-//       </div>
-
-//       {/* Content loading example */}
-//       <div>
-//         <Skeleton count={3} className="mb-4" />
-//         <Skeleton width="w-2/3" />
-//       </div>
-
-//       {/* Image placeholder example */}
-//       <Skeleton variant="rect" height="h-48" />
-
-//       {/* Button placeholder */}
-//       <Skeleton width="w-32" height="h-8" />
-//     </div>
-//   );
-// };
-
-// export default SkeletonDemo;

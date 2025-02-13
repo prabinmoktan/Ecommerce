@@ -1,6 +1,8 @@
 import React from 'react';
 import { CiShoppingCart } from 'react-icons/ci';
 import { MdFavoriteBorder } from "react-icons/md";
+import { useSelector } from 'react-redux';
+import { isLogged} from '../../../admin/Pages/(auth)/AuthSlice/Auth.slice';
 
 
 interface AppCardProps {
@@ -12,6 +14,7 @@ interface AppCardProps {
 }
 
 const AppCard: React.FC<AppCardProps> = ({title,  image, price, onClick}) => {
+    const isAuthenticated = useSelector(isLogged);
   return (
     <>
     <div className='w-72 h-96 cursor-pointer overflow-hidden shadow-lg flex flex-col'>
@@ -26,7 +29,7 @@ const AppCard: React.FC<AppCardProps> = ({title,  image, price, onClick}) => {
             </h1>
             </div>
             <div className='flex gap-3 '>
-                <MdFavoriteBorder className='bg-gray-200 rounded-full text-black text-2xl p-1'/>
+              { isAuthenticated && <MdFavoriteBorder className='bg-gray-200 rounded-full text-black text-2xl p-1'/>}
                  <CiShoppingCart className='bg-gray-200 rounded-full text-black text-2xl p-1'/>
             </div>
         </div>

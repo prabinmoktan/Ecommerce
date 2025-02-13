@@ -50,11 +50,11 @@ const Homepage = () => {
         <h1>
           All Collections
         </h1>
-        <div className="  flex flex-wrap justify-evenly">
+        <div className=" grid grid-cols-4 mx-5 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
         {
           card?.map((item, index)=> (
 
-            <div key={index} >
+            <div key={index} className="flex-1">
               <AppCard title={item.title} price={item.price} image={item.image}/>
             </div>
           ))

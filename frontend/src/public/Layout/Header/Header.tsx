@@ -27,7 +27,7 @@ const Header = () => {
     setOpenSearch(!openSearch);
   };
   const userdata = useSelector(user);
-  console.log(userdata);
+  
 
   //open or close account section
   const handleUser = () => {

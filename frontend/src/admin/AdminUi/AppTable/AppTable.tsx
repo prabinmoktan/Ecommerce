@@ -1,6 +1,6 @@
 import { ProductsTypes, UserTypes } from "../../../interface";
-import Productskeleton from "../../pages/Products/Productskeleton";
-import Userskeleton from "../../pages/Users/Userskeleton";
+import Productskeleton from "../../Pages/Products/Productskeleton";
+import Userskeleton from "../../Pages/Users/Userskeleton";
 
 interface TableTypes {
   headers: string[];

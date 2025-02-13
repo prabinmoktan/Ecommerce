@@ -8,7 +8,7 @@ import { FaInstagram } from "react-icons/fa6";
 const Footer = () => {
   return (
     <>
-    <footer className="w-screen pt-5  px-10 border-t border-black">
+    <footer className="w-screen pt-5  px-10 border-t border-black mt-5">
 
    
       <div className="w-screen grid grid-cols-2 px-10 gap-10  sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">

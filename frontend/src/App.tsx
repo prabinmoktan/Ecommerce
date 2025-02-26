@@ -14,6 +14,7 @@ import MainLayout from './public/Layout/MainLayout'
 import ProductsData from './public/pages/ProductsData/ProductsData'
 import EditProducts from './admin/Pages/EditProducts/EditProducts'
 import AddProducts from './admin/Pages/AddProducts/AddProducts'
+import Cart from './public/pages/Cart/Cart';
 
 const App = () => {
   const isAuthenticated = useSelector(isLogged);
@@ -32,7 +33,7 @@ const App = () => {
       }
     } else {
       // Allow unauthenticated users to access public routes
-      const publicRoutes = ['/', '/auth/login', '/auth/register','/products', '/product/:id'];
+      const publicRoutes = ['/', '/auth/login', '/auth/register','/products', '/product/:id', '/cart'];
       const isPublicRoute = publicRoutes.some((route) => {
         if (route.includes(':id')) {
           return location.pathname.startsWith('/product/');
@@ -51,6 +52,7 @@ const App = () => {
         <Route path='' element={<Homepage/>}/>
         <Route path='product/:id' element={<ProductsData/>}/>
         <Route path='products' element={<Product/>}/>
+        <Route path='cart' element={<Cart/>}/>
       </Route>
       <Route path='/auth'>
       <Route path='login' element={<Login/>}/>

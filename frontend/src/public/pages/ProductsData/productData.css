@@ -1,0 +1,25 @@
+.imageThumb{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+@media (max-width: 500px){
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    .imageContainer{
+        display: flex;
+        flex-direction: column-reverse;
+        
+    }
+    .imageThumb{
+        display: flex !important;
+        gap: 10px;
+    }
+   
+    .productImage{
+        width: 100vw;
+        background-color: green;
+    }
+} 

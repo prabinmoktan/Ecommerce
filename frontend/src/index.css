@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 
 html.dark{
@@ -71,6 +77,14 @@ body{
     
     }
     
+}
+a{
+  font-size: 1rem;
+}
+@media (max-width: 776px){
+  a{
+    font-size: 0.8rem;
+  }
 }
 
 @layer base {

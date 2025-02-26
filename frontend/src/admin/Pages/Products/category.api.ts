@@ -7,13 +7,15 @@ const CategoryApiSlice = baseApiSlice.injectEndpoints({
                 url: '/category', 
                 method: 'POST',
                 body: category,
-            })
+            }),
+            invalidatesTags: ['Category'], // Invalidates 'Category' tag after mutation
         }),
         getCategory: builder.query({
             query: ()=> ({
                 url: '/category',
                 method: 'GET'
-            })
+            }),
+            providesTags: ['Category'], // Invalidates 'Category' tag after mutation
         })
     }),
     

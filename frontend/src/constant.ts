@@ -25,7 +25,7 @@ export const publicNavlink = [
     link: "/contact",
   },
   {
-    name: "About Us",
+    name: "About ",
     link: "/about",
   },
 ];

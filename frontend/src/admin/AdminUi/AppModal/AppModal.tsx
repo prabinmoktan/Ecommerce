@@ -80,19 +80,21 @@ const AppModal = () => {
               </div>
               <h1 className="text-center text-sm ">{content.title}</h1>
               <div className=" flex justify-center gap-10 mt-5">
-                {showController && (
+                {showController ? (
                   <AppButton
                     title={content.save}
                     background="danger"
                     type="submit"
                   />
-                )}
+                )
+                :
                 <AppButton 
                 title={content.delete}
                 background="danger"
                 onClick={()=> handleDelete(content.id)}
                 type="button"
                 />
+              }
                 <AppButton
                   onClick={() => dispatch(closeModal())}
                   title={content.cancel}

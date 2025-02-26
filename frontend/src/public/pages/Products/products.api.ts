@@ -3,9 +3,10 @@ import { baseApiSlice } from "../../../axios/baseApiConfig";
 const productApi = baseApiSlice.injectEndpoints({
     endpoints:(builder)=> ({
         getProducts: builder.query({
-            query: ()=> ({
+            query: ({limit, page})=> ({
                 url: '/products',
-                method: 'GET'
+                method: 'GET',
+                params: ({limit, page})
             })
         }),
         getProductById: builder.query({

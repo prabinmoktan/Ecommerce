@@ -12,8 +12,9 @@ import { openModal } from "../../redux/ModalSlice";
 
 const Products = () => {
   const navigate = useNavigate();
-  const { isLoading, data } = useGetProductsQuery();
+  const { isLoading, data } = useGetProductsQuery({limit: 5, page: 1});
   const products = data?.products;
+  console.log('products==>', data)
   const dispatch = useDispatch();
   const handleOpenDeleteModal = (product: ProductsTypes) => {
     dispatch(

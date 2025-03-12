@@ -3,10 +3,12 @@ import { ApiResponse, ProductsTypes } from "../../../interface";
 
 const productsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getProducts: builder.query<ApiResponse, void>({
-      query: () => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getProducts: builder.query<ApiResponse, any>({
+      query: ({limit, page}) => ({
         url: "/products",
         method: "GET",
+        params: ({limit, page})
       }),
       providesTags: ['Product'],
     }),

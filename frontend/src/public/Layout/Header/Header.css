@@ -1,0 +1,23 @@
+.mediumNav{
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 576px){
+    .mediumNav{
+        display: none;
+    }
+    .search{
+        font-size: 0.8rem;
+    }
+}
+@media only screen and (min-width: 577px) and (max-width: 767px){
+    .mediumNav{
+        display:  flex;
+        gap: 1rem;
+        width: 100vw;
+        overflow: hidden;
+    }
+    .search{
+        font-size: 0.8rem;
+    }
+}

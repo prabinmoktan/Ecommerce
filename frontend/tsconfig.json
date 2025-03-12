@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": "src",  // This makes 'src' the base directory
+   
+    "paths": {
+      "@components/*": ["src/components/*"]
+    },
+    
+  },
+ 
+}

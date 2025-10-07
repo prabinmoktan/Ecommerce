@@ -1,5 +1,4 @@
 // Layout/SidebarLayout.tsx
-import React from 'react';
 import Sidebar from './Sidebar/Sidebar'; // Sidebar component
 import Navbar from './Navbar/Navbar';
 import { Outlet } from 'react-router-dom';

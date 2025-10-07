@@ -2,11 +2,13 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  
   "scripts": {
+    "build": "tsc",
     "dev": "tsx src/index.ts",
-    "test": "tsc && node dist/index.js"
+    "test": "npm run build && node dist/index.js"
   },
+ 
   "author": "",
   "license": "ISC",
   "description": "",

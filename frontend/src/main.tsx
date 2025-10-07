@@ -1,16 +1,16 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.tsx";
+
 import { Provider } from "react-redux";
-import AppModal from "./admin/AdminUi/AppModal/AppModal.tsx";
 import { ToastContainer } from "react-toastify";
 import { PersistGate } from "redux-persist/integration/react";
-import { persistor, store } from "./admin/redux/store.ts";
+import App from "./App";
+import { persistor, store } from "./admin/redux/store";
+import AppModal from "./admin/AdminUi/AppModal/AppModal";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  // <StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
         <BrowserRouter
@@ -24,5 +24,5 @@ createRoot(document.getElementById("root")!).render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </StrictMode>
+  // </StrictMode>
 );

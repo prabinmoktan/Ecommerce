@@ -1,5 +1,5 @@
 import { Request } from "express";
-import multer, { FileFilterCallback } from "multer";
+import multer from "multer";
 
 // Define allowed MIME types
 const allowedMimeTypes = [

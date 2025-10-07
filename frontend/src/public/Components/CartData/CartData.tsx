@@ -1,4 +1,3 @@
-import React from "react";
 import { FiMinus } from "react-icons/fi";
 import { FaPlus } from "react-icons/fa6";
 import { useDispatch } from "react-redux";

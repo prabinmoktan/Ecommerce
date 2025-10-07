@@ -1,4 +1,3 @@
-import React from 'react';
 import { CiShoppingCart } from 'react-icons/ci';
 import { MdFavoriteBorder } from "react-icons/md";
 import { useSelector } from 'react-redux';

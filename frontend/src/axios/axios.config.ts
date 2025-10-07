@@ -1,7 +1,11 @@
 import axios from "axios";
 import { errorToast } from "../services/toastify.service";
 
-export const baseUrl = import.meta.env.VITE_BASE_URL || "/api/v1";
+// export const baseUrl = import.meta.env.VITE_BASE_URL || "/api/v1";
+// export const baseUrl = process.env.VITE_BASE_URL || "/api/v1";
+const url = "http://localhost:8000/api/v1";
+
+export const baseUrl = url || "/api/v1";
 
 export const axiosInstance = axios.create({
   baseURL: baseUrl,
@@ -13,10 +17,11 @@ axiosInstance.interceptors.request.use(
     if (config.url?.includes("/login") || config.url?.includes("/refreshToken")) {
       return config;
     }
-  
+ 
     if (!window.navigator.onLine) {
-      // console.log("No internet connection ");
+      console.log(window.navigator.onLine)
       errorToast("No internet connection ")
+      
     }
     if (!config.headers) {
       config.headers = new axios.AxiosHeaders();

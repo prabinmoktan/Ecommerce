@@ -1,4 +1,3 @@
-import React from 'react'
 import AppTextField from '../AppForm/AppTextField/AppTextField'
 
 const index = () => {

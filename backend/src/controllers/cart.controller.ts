@@ -1,4 +1,3 @@
-import { user } from "./../../../frontend/src/admin/Pages/(auth)/AuthSlice/Auth.slice";
 import { Request, Response } from "express";
 import { Cart } from "../models/cart.model";
 import Stripe from "stripe";
@@ -17,7 +16,6 @@ const addToCart = async (req: Request, res: Response) => {
     //   });
     //   return;
     // }
-    console.log(cart.quantity)
    
     if (cart.length === 0) {
       res.status(400).json({

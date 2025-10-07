@@ -1,7 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import { NextFunction } from "express";
 import fs from 'fs';
-import { upload } from "../middleware/multer.middleware.ts";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

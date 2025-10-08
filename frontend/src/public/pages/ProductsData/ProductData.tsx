@@ -10,12 +10,14 @@ import { Skeleton } from "../../../admin/AdminUi/Skeleton/Skeleton";
 import RecommendationCards from "../../Components/RecommendationCards/RecommendationCards";
 import "./productData.css";
 
-const ProductsData = () => {
+const ProductData = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const { isLoading, data } = useGetProductByIdQuery(id);
   const { data: productData, isLoading: isOpening } = useGetProductsQuery({});
+  console.log(data, data)
   const product = data?.product;
+console.log(product)
 
   return (
     <>
@@ -98,4 +100,5 @@ const ProductsData = () => {
   );
 };
 
-export default ProductsData;
+export default ProductData;
+

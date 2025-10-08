@@ -6,7 +6,7 @@ import { errorToast } from "../services/toastify.service";
 
 const API_URL = import.meta.env.VITE_BASE_URL;
 
-
+console.log(API_URL)
 
 export const baseUrl = API_URL || "/api/v1";
 

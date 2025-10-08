@@ -11,10 +11,11 @@ import Products from './admin/Pages/Products/Products'
 import Users from './admin/Pages/Users/Users'
 import Product from './public/pages/Products/Products'
 import MainLayout from './public/Layout/MainLayout'
-import ProductsData from './public/pages/ProductsData/ProductsData'
 import EditProducts from './admin/Pages/EditProducts/EditProducts'
 import AddProducts from './admin/Pages/AddProducts/AddProducts'
 import Cart from './public/pages/Cart/Cart';
+import ProductData from './public/pages/ProductsData/ProductData'
+import Categories from './public/pages/Categories/Categories'
 
 const App = () => {
   const isAuthenticated = useSelector(isLogged);
@@ -50,9 +51,10 @@ const App = () => {
    <Routes>
       <Route path='/' element={<MainLayout/>}>
         <Route path='' element={<Homepage/>}/>
-        <Route path='product/:id' element={<ProductsData/>}/>
+        <Route path='product/:id' element={<ProductData/>}/>
         <Route path='products' element={<Product/>}/>
         <Route path='cart' element={<Cart/>}/>
+        <Route path='categories' element={<Categories/>}/>
       </Route>
       <Route path='/auth'>
       <Route path='login' element={<Login/>}/>

@@ -1,4 +1,4 @@
-import { baseApiSlice } from "../../axios/baseApiConfig";
+import { baseApiSlice } from "../../../axios/baseApiConfig";
 
 const categoriesApi = baseApiSlice.injectEndpoints({
     endpoints:(builder)=> ({

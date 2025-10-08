@@ -1,6 +1,6 @@
 import { useGetProductsQuery } from "./products.api";
 import AppCard from "../../ui/AppCard/AppCard";
-import { useGetCategoriesQuery } from "../Categories.api";
+import { useGetCategoriesQuery } from "../Categories/Categories.api";
 import { Skeleton } from "../../../admin/AdminUi/Skeleton/Skeleton";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -28,6 +28,7 @@ interface categoryTypes {
 const Products = () => {
   const { data, isLoading } = useGetProductsQuery({});
   const { data: categories, isLoading: loading } = useGetCategoriesQuery({});
+  console.log(data, categories)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

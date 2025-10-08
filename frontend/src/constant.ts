@@ -14,7 +14,7 @@ export const publicNavlink = [
   },
   {
     name: "Categories",
-    link: "",
+    link: "/categories",
   },
   {
     name: "Products",

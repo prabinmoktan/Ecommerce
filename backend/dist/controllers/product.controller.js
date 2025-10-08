@@ -166,6 +166,7 @@ const updateProductById = async (req, res) => {
             return;
         }
         const existingcategory = await category_model_1.Category.findOne({ name: category });
+        console.log(existingcategory);
         if (!existingcategory) {
             res.status(404).json({ success: false, message: "Category not found" });
             return;

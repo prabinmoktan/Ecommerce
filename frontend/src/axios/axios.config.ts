@@ -3,9 +3,12 @@ import { errorToast } from "../services/toastify.service";
 
 // export const baseUrl = import.meta.env.VITE_BASE_URL || "/api/v1";
 // export const baseUrl = process.env.VITE_BASE_URL || "/api/v1";
-const url = "http://localhost:8000/api/v1";
 
-export const baseUrl = url || "/api/v1";
+const API_URL = import.meta.env.VITE_BASE_URL;
+
+
+
+export const baseUrl = API_URL || "/api/v1";
 
 export const axiosInstance = axios.create({
   baseURL: baseUrl,

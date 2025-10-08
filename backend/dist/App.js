@@ -13,7 +13,9 @@ exports.app = app;
 app.use((0, cors_1.default)({
     origin: [
         'http://localhost:5173',
-        'http://localhost:5173/admin'
+        'http://localhost:5173/admin',
+        'https://ecommerce-y8ix.onrender.com',
+        'https://ecommerce-ashen-two-75.vercel.app'
     ],
     credentials: true,
 }));

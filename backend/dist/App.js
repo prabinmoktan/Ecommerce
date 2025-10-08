@@ -15,7 +15,7 @@ app.use((0, cors_1.default)({
         'http://localhost:5173',
         'http://localhost:5173/admin',
         'https://ecommerce-y8ix.onrender.com',
-        'https://ecommerce-ashen-two-75.vercel.app'
+        'https://https://ecommerce-blush-three-79.vercel.app'
     ],
     credentials: true,
 }));

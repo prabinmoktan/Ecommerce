@@ -28,7 +28,6 @@ interface categoryTypes {
 const Products = () => {
   const { data, isLoading } = useGetProductsQuery({});
   const { data: categories, isLoading: loading } = useGetCategoriesQuery({});
-  console.log(data, categories)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
